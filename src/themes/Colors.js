@@ -9,6 +9,6 @@ export default colors = {
     appBackground:      '#dedede',
     whiteBackground:    '#fefefe',
     blackFont:          '#1f1f1f',
-    whiteFont:          '#dedede',
+    whiteFont:          '#f9f9f9',
     clearBorder:        'gray'
   }

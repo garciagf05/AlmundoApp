@@ -42,6 +42,7 @@ class ListScreen extends Component {
           refreshing: false
         });
       }
+      console.log(response);
     })
     .catch((error) => { 
       this.setState({ refreshing: false });
@@ -89,7 +90,7 @@ class ListScreen extends Component {
                       keyExtractor={item => item._id}
                       refreshControl={
                         <RefreshControl refreshing={this.state.refreshing}
-                                        onRefresh={this.onRefresh}
+                                        onRefresh={this._onRefresh }
                         />
                       }/>
         }

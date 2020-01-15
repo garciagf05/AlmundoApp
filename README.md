@@ -1,132 +1,117 @@
-# API - Almundo
+# APP - Almundo
 
-A continuación se detalla como usar los servicios de la API.
+A continuación una explicación general de la aplicación.
 
-# Heroku
+# React Native CLI - Instalación y entorno
 
-Para el despliegue de la aplicación se empleó Heroku, la url donde se encuentran alojados los servicios es la siguiente:
+Para el desarrollo de esta app de muestra, se utilizó el cli de react native. Las instrucciones para la instalación y configuración del ambiente de desarrollo se encuentran en la documentación oficial de React Native.
 
-**https://api-servicios-almundo.herokuapp.com/api**
+***https://facebook.github.io/react-native/docs/getting-started***
 
-## Listado de Hoteles
-El listado de hoteles se obtiene a través del siguiente enlace:
-Método: **GET** 
-Endpoint:  https://api-servicios-almundo.herokuapp.com/api/hotels/list
-
-Las posibles respuestas y ejemplos de respuesta y ejemplos son los siguientes:
-
-Status: **200**
-````
-{
-    "status": "successful",
-    "message": "# hotel(s) was found",
-    "hotels" : [
-        {
-            "images":[
-                "https://url1.com"
-            ],
-            "_id": "ab1cd2ef3gh4ij5kl6mn7op8",
-            "name": "Example Hotel",
-            "stars": "3",
-            "price": "100000",
-            "country": "Colombia",
-            "state": "Antioquia",
-            "city": "Medellín",
-            "address": "calle 1 10-20"
-            "latitude": "6.0000000000",
-            "longitude": "-75.000000000"         
-        }
-   ]
-}
-````
-
-Status: **204**
-````
-{
-    "status": "successful",
-    "message": "0 hotels was found"
-}
-````
-> El cuerpo del mensaje solo es visible a través de de un cliente previamente configurado como **Axios** o **Request**.
-
-Status: **500**
-````
-{
-    "status": "error",
-    "message": "INTERNAL_SERVER_ERROR"
-}
-````
-
-
-## Información de un hotel
-
-La información de un hotel especifico se pude obtener a través del siguiente enlace:
-Método: **GET** 
-Endpoint:  https://api-servicios-almundo.herokuapp.com/api/hotels/info/:id
-
-Estos son algunos id de prueba:
-- 5e1dd4fb481c59b7b1675a82
-- 5e1f131ac7ec85be65d615f0
-- 5e1f1611c7ec85be65d72734
-
-Las posibles respuestas y ejemplos de respuesta y ejemplos son los siguientes:
-
-Status: **200**
-````
-{
-    "status": "successful",
-    "message": "A hotel was found",
-    "hotel" : {
-            "images":[
-                "https://url1.com"
-            ],
-            "_id": "ab1cd2ef3gh4ij5kl6mn7op8",
-            "name": "Example Hotel",
-            "stars": "3",
-            "price": "100000",
-            "country": "Colombia",
-            "state": "Antioquia",
-            "city": "Medellín",
-            "address": "calle 1 10-20"
-            "latitude": "6.0000000000",
-            "longitude": "-75.000000000"         
-    }
-}
-````
-
-
-Status: **204**
-````
-{
-    "status": "successful",
-    "message": "0 hotels was found"
-}
-````
-> El cuerpo del mensaje solo es visible a través de de un cliente previamente configurado como **Axios** o **Request**.
-
-Status: **500**
-````
-{
-    "status": "error",
-    "message": "INTERNAL_SERVER_ERROR"
-}
-````
-
-## Desplegar en local
-
-Para desplegar el proyecto de manera local ejecutar estos comandos en la raíz del proyecto:
+## Levantar la aplicación en ambiente local
+Despues de preparar el entorno de desarrollo y de clonar el repositorio ejecutamos en la raíz del proyecto:
 - npm install
-- npm run build && npm start
 
-## Dependencias
+> La aplicación no fue configurada para iOS
 
-Listado de dependencias  empleadas en el proyecto:
+**React Native  CLI < 3**
+- react-native run-android
+
+**React Native CLI  >= 3**
+- npx react-native run-android.
+
+Esto nos va a permitir testear la aplicación ya sea en un dispositivo fisico conectado o uno emulado.
+
+## Posible error Node 12.14, NPM 6 y CLI 3
+Es posible que al momento de compilar la aplicación la ventana de metro nos muestre un error del regex que revisa las rutas del sistema.
+
+Puntualmente sucede con las ultimas versiones del cli de react native y npm, para solucionar esta falla se debe realizar la siguiente corrección:
+
+En el archivo:
+````
+node_modules/metro-config/src/defaults/blacklist.js
+````
+
+Se reemplaza la variable  **sharedBlacklist** por la siguiente:
 
 ````
-"dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "mongoose": "^5.8.7",
-    "typescript": "^3.7.4"
-}
+var  sharedBlacklist = [
+    /node_modules[\/\\]react[\/\\]dist[\/\\].*/,
+    /website\/node_modules\/.*/,
+    /heapCapture\/bundle\.js/,
+    /.*\/__tests__\/.*/
+];
 ````
+
+Se guarda el archivo y se procede a compilar.
+> Fuente: https://www.youtube.com/watch?v=pSOegajhmVU
+
+## Compilar APK debug
+Para compilar una APK de prueba se ejecuta desde la raíz de la aplicación:
+
+**React Native  CLI < 3**
+- react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
+- cd android
+- gradlew assembleDebug
+
+**React Native CLI  >= 3**
+- npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/
+- cd android
+- gradlew assembleDebug
+
+> Para poder ejecutar el comando gradlew se debe tener el JDK previamente instalado y configurado en las variables de entorno del sistema. Ver la documentación de React Native para mayor información.
+
+## Ambiente de desarrollo
+Bajo las siguientes especificaciones se desarrolló y se probó la aplicación.
+````
+npx react-native info
+````
+
+````
+System:
+    OS: Windows 10 10.0.18363
+    CPU: (4) x64 Intel(R) Core(TM) i5-7200U CPU @ 2.50GHz
+    Memory: 3.66 GB / 11.88 GB
+  Binaries:
+    Node: 12.14.0 - C:\Program Files\nodejs\node.EXE
+    npm: 6.13.4 - C:\Program Files\nodejs\npm.CMD
+  SDKs:
+    Android SDK:
+      API Levels: 28, 29
+      Build Tools: 28.0.3, 29.0.2
+      System Images: android-29 | Intel x86 Atom_64, android-29 | Google APIs Intel x86 Atom, android-29 | Google APIs Intel x86 Atom_64, android-29 | Google Play Intel x86 Atom
+  IDEs:
+    Android Studio: Version  3.5.0.0 AI-191.8026.42.35.6010548
+  npmPackages:
+    react: 16.9.0 => 16.9.0
+    react-native: 0.61.5 => 0.61.5
+````
+
+# Componentes de la aplicación
+
+A continuación se detallan las partes que componen la aplicación.
+
+# Splash Screen
+Se emula una pantalla de carga que tarda 3 segundos en hacer la transición a la siguiente pantalla.
+
+![alt SplashScreen](http://imageshack.com/a/img921/7331/6DsHm7.png =300x600)
+# Listado de hoteles
+
+En este listado se pueden apreciar todos los hoteles que están registrados en la base de datos como colección
+
+![alt SplashScreen](http://imageshack.com/a/img923/3549/mok31H.png =300x600)
+
+Adicional se puede apreciar una barra de busqueda en donde se puede realizar un **filtrado por el nombre del hotel**
+
+![alt SplashScreen](http://imageshack.com/a/img923/7582/YxPjud.png =300x600)
+
+# Información de un hotel
+
+Muestra la información de un hotel en especifico, incluye un botón inferior que redirige a la aplicación de google maps al usuario con la ubicación del hotel en el mapa.
+
+![alt SplashScreen](http://imageshack.com/a/img921/7331/6DsHm7.png =300x600)
+
+# APK debug ya compilada
+
+El siguiente enlace contiene la apk ya compilada y probada.
+https://drive.google.com/file/d/1n3V9rWnO0PJUjTAtxsdosAfeWCiBPYVn/view?usp=sharing

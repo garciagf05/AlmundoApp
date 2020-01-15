@@ -30,7 +30,7 @@ const appNavigator = createStackNavigator(
       },
       headerTitleAlign: 'center',
       headerTitleStyle: { ...Fonts.extraLargeWhiteFont },
-      headerLeft: (<BackButton />),      
+      headerLeft: () => <BackButton />,      
     }
   }
 );
