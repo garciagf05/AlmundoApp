@@ -112,6 +112,8 @@ Muestra la información de un hotel en especifico, incluye un botón inferior qu
 
 <img src="https://imageshack.com/a/img921/7331/6DsHm7.png" width="300" height="600" />
 
+<img src="https://imagizer.imageshack.com/img921/2285/Yx1WWY.png" width="300" height="600" />
+
 # APK debug ya compilada
 
 El siguiente enlace contiene la apk ya compilada y probada.
