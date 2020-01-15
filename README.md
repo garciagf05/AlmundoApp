@@ -94,7 +94,7 @@ A continuación se detallan las partes que componen la aplicación.
 # Splash Screen
 Se emula una pantalla de carga que tarda 3 segundos en hacer la transición a la siguiente pantalla.
 
-<img src="https://imageshack.com/a/img921/7331/6DsHm7.png" width="300" height="600">
+<img src="https://imageshack.com/a/img921/7331/6DsHm7.png" width="300" height="600" />
 # Listado de hoteles
 
 En este listado se pueden apreciar todos los hoteles que están registrados en la base de datos como colección
