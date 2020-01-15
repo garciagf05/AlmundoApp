@@ -94,22 +94,22 @@ A continuación se detallan las partes que componen la aplicación.
 # Splash Screen
 Se emula una pantalla de carga que tarda 3 segundos en hacer la transición a la siguiente pantalla.
 
-![alt SplashScreen](http://imageshack.com/a/img921/7331/6DsHm7.png =300x600)
+!Aalt text](http://imageshack.com/a/img921/7331/6DsHm7.png =300x600)
 # Listado de hoteles
 
 En este listado se pueden apreciar todos los hoteles que están registrados en la base de datos como colección
 
-![alt SplashScreen](http://imageshack.com/a/img923/3549/mok31H.png =300x600)
+![Alt text](http://imageshack.com/a/img923/3549/mok31H.png =300x600)
 
 Adicional se puede apreciar una barra de busqueda en donde se puede realizar un **filtrado por el nombre del hotel**
 
-![alt SplashScreen](http://imageshack.com/a/img923/7582/YxPjud.png =300x600)
+![Alt text](http://imageshack.com/a/img923/7582/YxPjud.png =300x600)
 
 # Información de un hotel
 
 Muestra la información de un hotel en especifico, incluye un botón inferior que redirige a la aplicación de google maps al usuario con la ubicación del hotel en el mapa.
 
-![alt SplashScreen](http://imageshack.com/a/img921/7331/6DsHm7.png =300x600)
+![Alt text](http://imageshack.com/a/img921/7331/6DsHm7.png =300x600)
 
 # APK debug ya compilada
 
