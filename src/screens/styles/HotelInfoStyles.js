@@ -15,18 +15,6 @@ import {
         flex: 1,
         backgroundColor: Colors.whiteBackground
     },
-    loadingContainer: {
-        width: '100%',
-        height: '100%',
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignContent: 'center',
-    },
-    loadinLabel: {
-        ...Fonts.smallBlackFont
-    },
     dataContainer: {
         width: '100%',
         height: '100%',

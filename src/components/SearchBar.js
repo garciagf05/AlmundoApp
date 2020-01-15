@@ -6,7 +6,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { withNavigation }  from 'react-navigation';
 import searchBarStyles from './styles/SearchBarStyles';
-import { Colors, Fonts, Metrics } from '../themes';
+import { Colors, Metrics } from '../themes';
 
 class SearchBar extends React.Component {
 

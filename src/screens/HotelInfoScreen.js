@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 import {
   SafeAreaView,
   View,
-  ActivityIndicator,
   Image,
   Text,
   TouchableOpacity,
-  Linking
+  Linking,
+  Alert
 } from 'react-native';
 import {
   Rating
 } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HotelsApi from '../services/api/HotelsApi'
+import Loading from '../components/Loading';
 import hotelInfoStyles from './styles/HotelInfoStyles';
-import { Colors, Fonts, Metrics } from '../themes';
+import { Colors } from '../themes';
 import { connect } from 'react-redux';
 
 class HotelInfoScreen extends Component {
@@ -26,6 +27,7 @@ class HotelInfoScreen extends Component {
   constructor(props){
     super(props);
     this.hotelId = this.props.navigation.getParam('hotelId');
+    this.gmapsEndpoint = 'https://www.google.com/maps/search/?api=1'
     this.state = {
       hotelInfo: undefined
     }
@@ -43,25 +45,32 @@ class HotelInfoScreen extends Component {
         console.log(this.state.hotelInfo);
       }
     })
-    .catch((error) => { console.log(error) });
+    .catch((error) => this._showDataErrorAlert());
   };
 
   _linkToGoogleMaps = () => {
     Linking
-    .openURL(`https://www.google.com/maps/search/?api=1&query=${this.state.hotelInfo.latitude},${this.state.hotelInfo.longitude}`)
+    .openURL(`${this.gmapsEndpoint}&query=${this.state.hotelInfo.latitude},${this.state.hotelInfo.longitude}`)
     .catch(error => console.log(`G-Maps Error ${error}`))
   };
+
+  _showDataErrorAlert = () => {
+    Alert.alert(
+      'Error',
+      'No se pudo obtener la información de los hoteles, verifique su conexión a internet.',
+      [
+        { text: 'Entendido', onPress: () =>  console.log('OK Pressed') }
+      ]
+      
+    );
+  }
 
   render = () => {
     return (
       <SafeAreaView style={hotelInfoStyles.screenContainer}>
         {
           !this.state.hotelInfo ?
-            <View style={hotelInfoStyles.loadingContainer}>
-              <ActivityIndicator size={"large"}
-                                  color={Colors.primary}/>
-              <Text>{'Cargando Información'}</Text>
-            </View>
+            <Loading />
           : // When object is assigned
           <View style={hotelInfoStyles.dataContainer}>
             <Image source={ {uri: this.state.hotelInfo.images[0] }}
@@ -99,7 +108,7 @@ class HotelInfoScreen extends Component {
                     name={'google-maps'}
                     size={60}
                     color={Colors.primary}
-                  />
+                />
               </TouchableOpacity>
             </View>
           </View>
@@ -109,10 +118,4 @@ class HotelInfoScreen extends Component {
   };
 }
 
-function mapStateToProps(state){
-  return {
-    hotels: state.hotel.hotelsList
-  }
-}
-
-export default connect(mapStateToProps)(HotelInfoScreen)
+export default connect(null)(HotelInfoScreen)

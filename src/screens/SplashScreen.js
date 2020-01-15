@@ -6,7 +6,6 @@ import {
   ActivityIndicator,
   Text
 } from 'react-native';
-import StoragePermission from '../services/permissions/StoragePersmission';
 import splashStyles from './styles/SplashStyles';
 import { Colors } from '../themes';
 import { connect } from 'react-redux';
@@ -19,33 +18,19 @@ class SplashScreen extends Component {
 
   constructor(props){
     super(props);
-    this.storagePermission = new StoragePermission();
     this.splashBackground = require('../assets/images/almundo-logo-full-color.png');
     this.loadingText = `Cargando`;
   }
 
   componentDidMount = async() => {
-    await this.storagePermission.handleStoragePermission()
-    .then((granted) => {
-      console.log(granted);
-      this._removeHotelList();
-      this._goToNextScreen();
-    })
-    .catch((error) => {
-      console.log(error);
-      this._goToNextScreen();
-    });
-  };
-
-  _removeHotelList = () => {
-    this.props.dispatch({
-      type: 'REMOVE_HOTEL_LIST',
-      payload: {}
-    });
+    this._goToNextScreen();
   };
 
   _goToNextScreen = () => {
-    this.props.navigation.navigate('App');
+    setTimeout(
+      () => this.props.navigation.navigate('App'),
+      3000
+    );
   };
 
   render = () => {
@@ -65,10 +50,5 @@ class SplashScreen extends Component {
   };
 }
 
-function mapStateToProps(state){
-  return {
-    hotels: state.hotel.hotelsList
-  }
-}
 
-export default connect(mapStateToProps)(SplashScreen);
+export default connect(null)(SplashScreen);

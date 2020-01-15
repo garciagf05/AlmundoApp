@@ -10,10 +10,9 @@ import {
 } from 'react-native-elements';
 import { withNavigation }  from 'react-navigation';
 import hotelCardStyles from './styles/HotelCardStyles';
-import { Colors, Fonts, Metrics } from '../themes';
 
 class HotelCard extends React.Component {
-  
+
   constructor(props){
     super(props);
   }

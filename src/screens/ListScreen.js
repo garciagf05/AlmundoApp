@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import {
   SafeAreaView,
   FlatList,
-  RefreshControl
+  RefreshControl,
+  Alert
 } from 'react-native';
-import StoragePermission from '../services/permissions/StoragePersmission';
 import HotelsApi from '../services/api/HotelsApi'
 import SearchBar from '../components/SearchBar';
+import Loading from '../components/Loading';
 import HotelCard from '../components/HotelCard';
 import listStyles from './styles/ListStyles';
 import { connect } from 'react-redux';
@@ -20,47 +21,32 @@ class ListScreen extends Component {
 
   constructor(props){
     super(props);
-    this.storagePermission = new StoragePermission();
     this.state = {
       hotelsList: [],
-      auxList: []
+      auxList: [],
+      refreshing: false
     }
   }
 
   componentDidMount = async() => {
-    if (!this.props.hotels){
-      this._getHotelsList()
-    } else {
-      this.setState({
-        hotelsList: this.props.hotels,
-        auxLits: this.props.hotels
-      })
-    }
+    this._getHotelsList()
   };
 
-  _getHotelsList = async () => {
-    await HotelsApi.getHotelsList()
+  _getHotelsList = () => {
+    HotelsApi.getHotelsList()
     .then((response) => {
       if (response.status === 200){
         this.setState({
           hotelsList: response.data.hotels,
-          auxList: response.data.hotels
+          auxList: response.data.hotels,
+          refreshing: false
         });
-        this._verifyStoragePermission();
       }
     })
-    .catch((error) => {console.log(error)})
-  };
-
-  _verifyStoragePermission = async() => {
-    await this.storagePermission.handleStoragePermission()
-    .then((granted) => {
-      console.log(granted);
-      this._dispatchList();
+    .catch((error) => { 
+      this.setState({ refreshing: false });
+      this._showDataErrorAlert();
     })
-    .catch((error) => {
-      console.log(error);
-    });
   };
 
   _findHotels = (text) => {
@@ -73,30 +59,44 @@ class ListScreen extends Component {
     }
   };
 
-  _dispatchList = () => {
-    this.props.dispatch({
-      type: 'SET_HOTEL_LIST',
-      payload: { hotelsList: this.state.hotelsList }
-    });
+  _onRefresh = () => {
+    this.setState({ refreshing: true });
+    this._getHotelsList();
   };
+
+  _showDataErrorAlert = () => {
+    Alert.alert(
+      'Error',
+      'No se pudo obtener la información de los hoteles, verifique su conexión a internet.',
+      [
+        { text: 'Entendido', onPress: () =>  console.log('OK Pressed') }
+      ]
+      
+    );
+  }
 
   render = () => {
     return (
       <SafeAreaView style={listStyles.screenContainer}>
         <SearchBar searchFunction={this._findHotels.bind(this)}/>
-        <FlatList style={listStyles.flatListContainer}
-                  data={this.state.hotelsList}
-                  renderItem={( { item } ) => <HotelCard data={item}/>}
-                  keyExtractor={item => item._id}/>
+        {
+          this.state.auxList.length <= 0 ?
+            <Loading />
+          : // When list is filled
+            <FlatList style={listStyles.flatListContainer}
+                      data={this.state.hotelsList}
+                      renderItem={( { item } ) => <HotelCard data={item}/>}
+                      keyExtractor={item => item._id}
+                      refreshControl={
+                        <RefreshControl refreshing={this.state.refreshing}
+                                        onRefresh={this.onRefresh}
+                        />
+                      }/>
+        }
       </SafeAreaView>
     );
   };
 }
 
-function mapStateToProps(state){
-  return {
-    hotels: state.hotel.hotelsList
-  }
-}
 
-export default connect(mapStateToProps)(ListScreen)
+export default connect(null)(ListScreen)
