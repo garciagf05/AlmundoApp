@@ -6,6 +6,9 @@ export default colors = {
     alert:              '#ffce00',
     danger:             '#f04141',
     disabled:           '#f5ddb8',
-    appBackground:      '#fefefe',
+    appBackground:      '#dedede',
+    whiteBackground:    '#fefefe',
     blackFont:          '#1f1f1f',
+    whiteFont:          '#dedede',
+    clearBorder:        'gray'
   }

@@ -35,5 +35,41 @@ export default fonts = StyleSheet.create({
         fontFamily: FONT_FAMILY.lato,
         color: Colors.blackFont,
         fontSize: 18
+    },
+    extraSmallWhiteFont: {
+        fontFamily: FONT_FAMILY.lato,
+        color: Colors.whiteFont,
+        fontSize: 10
+    },
+    smallWhiteFont: {
+        fontFamily: FONT_FAMILY.lato,
+        color: Colors.whiteFont,
+        fontSize: 12
+    },
+    mediumWhiteFont: {
+        fontFamily: FONT_FAMILY.lato,
+        color: Colors.whiteFont,
+        fontSize: 14
+    },
+    largeWhiteFont: {
+        fontFamily: FONT_FAMILY.lato,
+        color: Colors.whiteFont,
+        fontSize: 16
+    },
+    extraLargeWhiteFont: {
+        fontFamily: FONT_FAMILY.lato,
+        color: Colors.whiteFont,
+        fontSize: 18
+    },
+    hotelCardTitle: {
+        fontFamily: FONT_FAMILY.quickSand,
+        fontSize: 13,
+        color: Colors.blackFont,
+        fontWeight: 'bold'
+    },
+    hotelCardPriceLabel: {
+        fontFamily: FONT_FAMILY.lato,
+        color: 'gray',
+        fontSize: 9
     }
 });

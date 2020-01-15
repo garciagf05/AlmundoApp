@@ -8,9 +8,10 @@ import {
 } from 'react-native';
 import StoragePermission from '../services/permissions/StoragePersmission';
 import splashStyles from './styles/SplashStyles';
-import { Colors } from '../themes'
+import { Colors } from '../themes';
+import { connect } from 'react-redux';
 
-export default class SplashScreen extends Component {
+class SplashScreen extends Component {
 
   static navigationOptions = {
     headerShown: false
@@ -27,6 +28,7 @@ export default class SplashScreen extends Component {
     await this.storagePermission.handleStoragePermission()
     .then((granted) => {
       console.log(granted);
+      this._removeHotelList();
       this._goToNextScreen();
     })
     .catch((error) => {
@@ -35,8 +37,15 @@ export default class SplashScreen extends Component {
     });
   };
 
-  _goToNextScreen = () => {
+  _removeHotelList = () => {
+    this.props.dispatch({
+      type: 'REMOVE_HOTEL_LIST',
+      payload: {}
+    });
+  };
 
+  _goToNextScreen = () => {
+    this.props.navigation.navigate('App');
   };
 
   render = () => {
@@ -55,3 +64,11 @@ export default class SplashScreen extends Component {
     );
   };
 }
+
+function mapStateToProps(state){
+  return {
+    hotels: state.hotel.hotelsList
+  }
+}
+
+export default connect(mapStateToProps)(SplashScreen);

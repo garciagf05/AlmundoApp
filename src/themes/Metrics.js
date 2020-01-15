@@ -27,6 +27,7 @@ if (SO === 'ios'){
 const METRICS = {
   screenWidth,
   screenHeight,
+  backButton: 24
 }
 
 export default METRICS;
