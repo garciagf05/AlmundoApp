@@ -95,21 +95,22 @@ A continuación se detallan las partes que componen la aplicación.
 Se emula una pantalla de carga que tarda 3 segundos en hacer la transición a la siguiente pantalla.
 
 <img src="https://imageshack.com/a/img921/7331/6DsHm7.png" width="300" height="600" />
+
 # Listado de hoteles
 
 En este listado se pueden apreciar todos los hoteles que están registrados en la base de datos como colección
 
-![Screenshot](https://imageshack.com/a/img923/3549/mok31H.png)
+<img src="https://imageshack.com/a/img923/3549/mok31H.png" width="300" height="600" />
 
 Adicional se puede apreciar una barra de busqueda en donde se puede realizar un **filtrado por el nombre del hotel**
 
-![Screenshot](https://imageshack.com/a/img923/7582/YxPjud.png)
+<img src="https://imageshack.com/a/img923/7582/YxPjud.png" width="300" height="600" />
 
 # Información de un hotel
 
 Muestra la información de un hotel en especifico, incluye un botón inferior que redirige a la aplicación de google maps al usuario con la ubicación del hotel en el mapa.
 
-![Screenshot](https://imageshack.com/a/img921/7331/6DsHm7.png)
+<img src="https://imageshack.com/a/img921/7331/6DsHm7.png" width="300" height="600" />
 
 # APK debug ya compilada
 
